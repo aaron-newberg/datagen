@@ -55,9 +55,9 @@ def createSubElements(root):
     child = ET.SubElement(root, uris[random.randint(0, len(uris)-1)] + "nested")
     nodes.append(Node("nested", None, child))
     while random.randint(0, 100) > 15:
-        newchild = createRandomDataElement(child)
+        createRandomDataElement(child)
     while random.randint(0, 100) > 50:
-        newnested = createSubElements(child)
+        createSubElements(child)
     return root
 
 def assignData():
