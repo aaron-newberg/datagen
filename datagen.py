@@ -9,6 +9,7 @@ samplesDict = {}
 nodes = []
 namespaces = {}
 uris = []
+numNested = 0
 
 class Node:
     """A node in the example data to assign a value to"""
@@ -131,12 +132,19 @@ def createRandomDataDict():
     return child
 
 def createSubDict():
-    nested = {}
+    global numNested
+    temp = {}
     while random.randint(0, 100) > 15:
         newchild = createRandomDataDict()
-        nested.update(newchild)
-    while random.randint(0, 100) > 50:
+        temp.update(newchild)
+        if random.randint(0, 100) > 90:
+            newchild = createSubDict()
+            temp.update(newchild)
+    nested = {"nested" + str(numNested) : temp}
+    numNested = numNested + 1
+    while random.randint(0, 100) > 75:
         newnested = createSubDict()
+        numNested = numNested + 1
         nested.update(newnested)
     return nested
 
